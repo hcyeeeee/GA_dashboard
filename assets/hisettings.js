@@ -38,7 +38,7 @@ function loadClient() {
 var obj1 = {
     ids: 'ga:153085827',
     metrics: 'rt:activeUsers',
-    dimensions: 'rt:pageTitle,rt:Source,rt:Medium',
+    dimensions: 'rt:pageTitle,rt:medium,rt:deviceCategory',
     'max-results': 50,
     sort: '-rt:activeUsers',
 }
@@ -49,8 +49,6 @@ var obj2 = {
     dimensions: 'rt:deviceCategory',
     sort: '-rt:activeUsers',
 }
-
-
 function execute() {
     // 10分鐘自動重整
     setInterval(function execute() {
@@ -87,23 +85,16 @@ function execute() {
                 $('.act-users').html(obj1.result.totalsForAllResults['rt:activeUsers'])
                 $('.page-title #page_content').html('')
                 var realtime_template = `
-                <tr class="row" >
-                <td class="col-1 c2">{{no}}</td>
-                <td class="col-8 c1">&nbsp;&nbsp;&nbsp;{{title}}</td>
-                <td class="col-1 c2">{{Source}}</td>
-                <td class="col-2 c2">{{ActiveUsers}}</td>
-                            
-                </tr>
-              
-                `
+    <div class="col-10 c1">{{title}}</div>
+    <div class="col-1 c2">{{medium}}</div>
+    <div class="col-1 c3">{{device}}</div>
+    `
 
                 for (var i = 0; i < 20; i++) {
                     var realtime_html = realtime_template
-                    .replace('{{no}}', [i+1])
                         .replace('{{title}}', obj1.result.rows[i][0])
-                        .replace('{{Source}}', obj1.result.rows[i][1])
-                        .replace('{{Medium}}', obj1.result.rows[i][2])
-                        .replace('{{ActiveUsers}}', obj1.result.rows[i][3])
+                        .replace('{{medium}}', obj1.result.rows[i][1])
+                        .replace('{{device}}', obj1.result.rows[i][3])
                     $('.page-title #page_content').append(realtime_html)
                 }
             },
@@ -145,23 +136,16 @@ function execute() {
             $('.act-users').html(obj1.result.totalsForAllResults['rt:activeUsers'])
             $('.page-title #page_content').html('')
             var realtime_template = `
-            <tr class="row" >
-            <td class="col-1 c2">{{no}}</td>
-            <td class="col-8 c1">&nbsp;&nbsp;&nbsp;{{title}}</td>
-            <td class="col-1 c2">{{Source}}</td>
-            <td class="col-2 c2">{{ActiveUsers}}</td>       
-            </tr>
-
+          <div class="col-10 c1">{{title}}</div>
+          <div class="col-1 c2">{{medium}}</div>
+          <div class="col-1 c3">{{device}}</div>
           `
 
             for (var i = 0; i < 20; i++) {
                 var realtime_html = realtime_template
-                .replace('{{no}}', [i+1])
-                .replace('{{title}}', obj1.result.rows[i][0])
-                .replace('{{Source}}', obj1.result.rows[i][1])
-                .replace('{{Medium}}', obj1.result.rows[i][2])
-                .replace('{{ActiveUsers}}', obj1.result.rows[i][3])
-                
+                    .replace('{{title}}', obj1.result.rows[i][0])
+                    .replace('{{medium}}', obj1.result.rows[i][1])
+                    .replace('{{device}}', obj1.result.rows[i][3])
                 $('.page-title #page_content').append(realtime_html)
             }
         },
