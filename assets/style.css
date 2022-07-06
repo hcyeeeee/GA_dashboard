@@ -19,7 +19,9 @@ div {
 
 
 button {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(60, 60, 60);
+    color:  rgb(110, 110, 110);
+    opacity: .4;
     box-sizing: border-box;
     display: inline-flex;
     font-family: Inter, sans-serif;
@@ -53,6 +55,7 @@ section {
 .row {
     margin-right: 0px !important;
     margin-left: 0px !important;
+    margin-top: -1px !important;
 }
 
 

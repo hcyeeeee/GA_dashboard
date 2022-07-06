@@ -38,7 +38,7 @@ function loadClient() {
 var obj1 = {
     ids: 'ga:153085827',
     metrics: 'rt:activeUsers',
-    dimensions: 'rt:pageTitle,rt:Source,rt:Medium',
+    dimensions: 'rt:pageTitle,rt:Source,rt:pagePath',
     'max-results': 50,
     sort: '-rt:activeUsers',
 }
@@ -102,7 +102,7 @@ function execute() {
                     .replace('{{no}}', [i+1])
                         .replace('{{title}}', obj1.result.rows[i][0])
                         .replace('{{Source}}', obj1.result.rows[i][1])
-                        .replace('{{Medium}}', obj1.result.rows[i][2])
+                      
                         .replace('{{ActiveUsers}}', obj1.result.rows[i][3])
                     $('.page-title #page_content').append(realtime_html)
                 }
@@ -111,7 +111,7 @@ function execute() {
                 console.error('Execute error', err)
             }
         )
-    }, 600000)
+    }, 300000)
 
     return gapi.client.analytics.data.realtime.get(obj1).then(
         function (obj1) {
@@ -159,8 +159,8 @@ function execute() {
                 .replace('{{no}}', [i+1])
                 .replace('{{title}}', obj1.result.rows[i][0])
                 .replace('{{Source}}', obj1.result.rows[i][1])
-                .replace('{{Medium}}', obj1.result.rows[i][2])
                 .replace('{{ActiveUsers}}', obj1.result.rows[i][3])
+            
                 
                 $('.page-title #page_content').append(realtime_html)
             }
@@ -336,7 +336,7 @@ function loadDataHandler() {
         })
 
         // 每十分鐘更新一次
-    }, 600000)
+    }, 300000)
 
     // Taiwan News Competitors
     $.ajax(news_tw).done((response) => {
